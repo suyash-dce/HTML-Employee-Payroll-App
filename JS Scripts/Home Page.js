@@ -35,9 +35,9 @@ function createInnerHTML(){
             <td>${empData._gender}</td>
             <td>${getDeptHTML(empData._department)}</td>
             <td>RS ${empData._salary}</td>
-            <td>${(empData._startDate).slice(0,10)}</td>
+            <td>${stringifyDate(empData._startDate)}</td>
             <td>
-                <img id="${empData._id}" onclick="remove()" alt="delete" src="./Assets/icons/delete-black-18dp.svg">
+                <img id="${empData._id}" onclick="remove(this)" alt="delete" src="./Assets/icons/delete-black-18dp.svg">
                 <img id="${empData._id}" onclick="update()" alt="edit" src="./Assets/icons/create-black-18dp.svg">
             </td>
         </tr>
@@ -57,25 +57,39 @@ function getDeptHTML(deptList){
 function createEmployeePayrollJson(){
     let empPayrollLocalList = [
         {
-            _name:'Suyash',
+            _name:'Narayan Mahadevan',
             _gender:'Male',
-            _department:['Engineering'],
+            _department:['Engineering','Finance'],
             _salary:'500000',
-            _startDate:'29 Oct 2020',
+            _startDate:'29 Oct 2019',
             _note:'',
             _id: new Date().getTime(),
             _profilePic:'./Assets/profile-images/Ellipse -5.png'
         },
         {
-            _name:'Google Assistant',
+            _name:'Amarpa Shashanka',
             _gender:'Female',
             _department:['Sales'],
             _salary:'400000',
-            _startDate:'20 Nov 2020',
+            _startDate:'18 Nov 2020',
             _note:'',
             _id: new Date().getTime()+1,
             _profilePic:'./Assets/profile-images/Ellipse -7.png'
         }
     ]
     return empPayrollLocalList;
+}
+
+function remove(node){
+    let empPayrollData = empPayrollList.find(empData=>empData._id == node.id);
+    if(!empPayrollData){
+        console.log("No entry found!!");
+        return;
+    }
+    const index = empPayrollList.map(empData=>empData._id)
+                                .indexOf(empPayrollData._id);
+    empPayrollList.splice(index,1);
+    localStorage.setItem("EmployeePayrollList",JSON.stringify(empPayrollList));
+    document.querySelector(".emp-count").textContent = empPayrollList.length;
+    createInnerHTML();
 }

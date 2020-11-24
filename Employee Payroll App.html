@@ -19,7 +19,7 @@
         </div>
     </header>
     <div class="form-content">
-        <form class="form" action="#" onsubmit="save();return false">
+        <form class="form" action="#" onsubmit="saveNreset();return false">
             <div class="form-head">Employee Payroll App</div>
             <div class="row-content">
                 <label class="label text" for="name">Employee Name: </label>
@@ -87,6 +87,7 @@
             <div>
                 <div class="row-content">
                     <label class="label text" for="startDate">Start Date: </label>
+                    <div id="startDate">
                     <select id="day" name="Day">
                         <option value="1">01</option>
                         <option value="2">02</option>
@@ -141,17 +142,21 @@
                         <option value="2017">2017</option>
                         <option value="2016">2016</option>
                     </select>
+                    </div>
                 </div>
+            </div>
+            <div class="row-content">
+                <error-output class="date-error" for="startDate"></error-output>
             </div>
             <div class="row-content">
                 <label class="label text" for="notes">Notes</label>
                 <textarea id="notes" class="input" name="Notes" placeholder="Add notes.." style="height:100px"></textarea>
             </div>
             <div class="buttonParent">
-                <a href="./home.html" class="resetButton button cancelButton">Cancel</a>
+                <a href="./Home Page.html" class="resetButton button cancelButton">Cancel</a>
                 <div class="submit-reset">
                     <button type="submit" class="button submitButton" id="submitButton">Submit</button>
-                    <button type="reset" class="resetButton button" id="resetButton">Reset</button>
+                    <button type="reset" class="resetButton button" id="resetButton" onclick="resetForm();">Reset</button>
                 </div>
             </div>
         </form>
